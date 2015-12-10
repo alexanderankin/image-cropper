@@ -1,0 +1,10 @@
+# input and output directories
+in: "in"
+out: "out"
+# dimentions
+start:
+    x: 20
+    y: 40
+end: 
+    x: 200
+    y: 300
