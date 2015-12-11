@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-
-# from PIL import Image, ImageFilter
-
 """Batch Image Processing
 
 Just running the program will crop all the pictures in "in" according
@@ -28,6 +25,7 @@ Options:
 from docopt import docopt
 from os.path import isfile
 from lib import image_ops
+from sys import version_info as vi
 
 def load_config(config_file="config.yml"):
 	file = open(config_file, 'r')
@@ -49,14 +47,17 @@ def main(arguments):
 			no_arguments_given = False
 
 	if no_arguments_given:
-		print("Proceed with default behaviour? (use -h for help) ", end="")
-		if "y" in input():
+		if vi.major is 2:
+			inp = raw_input("Proceed with default behaviour? (use -h for help) ")
+		else:
+			inp = input("Proceed with default behaviour? (use -h for help) ")
+
+		if "y" in inp:
 			load_config()
 		else:
 			print ("Bye!")
 			exit()
 	elif arguments["--config"] is not None:
-		# print(arguments["--config"]); exit()
 		if (isfile(arguments["--config"])):
 			print ("using " + arguments["--config"]); exit()
 		else:
